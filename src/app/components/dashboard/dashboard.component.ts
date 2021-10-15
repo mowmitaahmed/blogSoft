@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { BlogService } from 'src/app/services/blogs/blog.service';
-import { FormBuilder, FormGroup, Validators,FormControl} from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
 import { Blog } from '../../../interfaces/blog';
 import { Subscription } from 'rxjs';
 import { BlogsModel } from './blog-dashboard.model';
@@ -12,10 +12,6 @@ import { BlogsModel } from './blog-dashboard.model';
 })
 export class DashboardComponent implements OnInit, OnDestroy  {
 
-  //Form Validations
-  titleFormControl = new FormControl('',[
-    Validators.required])
-
   blogsModelObj: BlogsModel = new BlogsModel();
   formValue !: FormGroup;
   showAdd !: boolean;
@@ -25,7 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy  {
 
   displayedColumns: string[] = ['_id', 'Author', 'Title', 'Short Description','CreatedAt','UpdatedAt', 'Actions'];
 
-  private subData ?: Subscription;
+  private subData: Subscription = new Subscription;
 
   blogs: Blog[] = [];
   totalBlog = 0;
@@ -34,7 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy  {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      title: ['',[Validators.required]],
+      title: [''],
       slug: [''],
       author: [''],
       shortDescription: [''],
@@ -66,25 +62,27 @@ getAllBlogs() {
       })
 }
 
-postPostDetails() {
-  this.blogsModelObj.author = this.formValue.value.author;
-  this.blogsModelObj.title = this.formValue.value.title;
-  this.blogsModelObj.slug = this.formValue.value.slug;
-  this.blogsModelObj.shortDescription = this.formValue.value.shortDescription;
+postBlogDetails() {
 
-  console.log('blogsModelObj: ', this.blogsModelObj);
+      this.blogsModelObj.title = this.formValue.value.title;
+      this.blogsModelObj.author = this.formValue.value.author;
+      this.blogsModelObj.slug = this.formValue.value.slug;
+      this.blogsModelObj.shortDescription = this.formValue.value.shortDescription;
 
-  this.api.postBlog(this.blogsModelObj)
-    .subscribe(res => {
-      if (res.success) {
-        console.log(res);
-        this.formValue.reset();
-      }
-      this.getAllBlogs();
-    },
-      err => {
-        console.log(err);
-      });
+      console.log('blogsModelObj: ', this.blogsModelObj);
+  
+      this.api.postBlog(this.blogsModelObj).subscribe(res => {
+        console.log("Hello");
+          if (res.success) {
+            console.log(res);
+            alert("Post Added Successfully");
+            this.formValue.reset();
+          }
+          this.getAllBlogs();
+        },
+          err => {
+            alert(err)
+          })
 }
 
 

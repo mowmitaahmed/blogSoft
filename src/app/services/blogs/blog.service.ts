@@ -25,6 +25,7 @@ export class BlogService {
     }
 
     postBlog( data: any ){
+      console.log("Post Method");
       return this.http.post<{success: boolean; data: Blog[]; count: number}>(API_BLOG + 'add-blog', data).pipe(map((res:any)=>{
         return res;
       }));

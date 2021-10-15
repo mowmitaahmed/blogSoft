@@ -8,32 +8,28 @@
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
         <mat-form-field class="full-width">
-          <input type="text" [formControl]="titleFormControl" formControlName="author" value="data.author" matInput placeholder="Author name">
-          <mat-error *ngIf="titleFormControl.hasError('required')">Author is required</mat-error>
+          <input type="text" formControlName="author" matInput placeholder="Author name">
         </mat-form-field>
       </div>
       <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
         <mat-form-field class="full-width">
-          <input type="text" [formControl]="titleFormControl" formControlName="slug" matInput placeholder="Slug">
-          <mat-error *ngIf="titleFormControl.hasError('required')">Slug is required</mat-error>
+          <input type="text" formControlName="slug" matInput placeholder="Slug">
         </mat-form-field>
       </div>
       <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
         <mat-form-field class="full-width">
-          <input type="text" [formControl]="titleFormControl" formControlName="title" matInput placeholder="Blog Title">
-          <mat-error *ngIf="titleFormControl.hasError('required')">Title is required</mat-error>
+          <input type="text" formControlName="title" matInput placeholder="Blog Title">
         </mat-form-field>
       </div>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="100%">
         <mat-form-field class="full-width">
-          <textarea [formControl]="titleFormControl" formControlName="shortDescription" matInput placeholder="Blog Description"></textarea>
-          <mat-error *ngIf="titleFormControl.hasError('required')">Short Description is required</mat-error>
+          <textarea formControlName="shortDescription" matInput placeholder="Blog Description"></textarea>
         </mat-form-field>
       </div>
       <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayoutAlign="start center">
-        <button *ngIf="!showUpdate" mat-button (click)="postPostDetails()" style="background-color: #3F51B5;color: white;">Post</button>
+        <button *ngIf="!showUpdate" mat-button (click)="postBlogDetails()" style="background-color: #3F51B5;color: white;">Post</button>
         <button *ngIf="showUpdate" mat-button (click)="updateBlogDetails()" style="background-color:teal;color: white; margin-left: 15px;">Update</button>
       </div>
     </div>
