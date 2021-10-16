@@ -1,5 +1,5 @@
 export class BlogsModel{
-    _id: number = 0;
+    _id ?: string;
     title: string = '';
     slug: string = '';
     author: string = '';
